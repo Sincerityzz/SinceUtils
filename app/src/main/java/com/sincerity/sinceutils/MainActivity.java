@@ -12,12 +12,15 @@ import com.sincerity.utilslibrary.http.SVolley;
 public class MainActivity extends AppCompatActivity {
     private Button btnRequest;
     private TextView tvResponse;
-    private String url = "https://wanandroid.com/wxarticle/chapters/json";
+
+
+  private String url = "https://wanandroid.com/wxarticle/chapters/json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         btnRequest = findViewById(R.id.btn_request);
         tvResponse = findViewById(R.id.tvResponse);
         btnRequest.setOnClickListener(new View.OnClickListener() {
@@ -38,4 +41,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

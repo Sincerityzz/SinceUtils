@@ -73,11 +73,17 @@ public class ParseHttpRequest implements IHttpRequest {
             listener.onFail(e.getMessage());
         } finally {
             try {
-                bufferedOutputStream.flush();
-                bufferedOutputStream.close();
-                outputStream.close();
-                if (inputStream!=null)
-                inputStream.close();
+                if (bufferedOutputStream != null) {
+                    bufferedOutputStream.flush();
+                    bufferedOutputStream.close();
+                }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+
+                if (inputStream != null) {
+                    inputStream.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 listener.onFail(e.getMessage());

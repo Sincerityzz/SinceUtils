@@ -24,6 +24,15 @@ public class SVolley {
         sendJsonRequest(url, requestInfo, method, null, dataListener);
     }
 
+    /**
+     *
+     * @param url 必须字段 不能为空
+     * @param requestInfo 请求参数 可以为空 但是不能省略
+     * @param method  请求方式 GET POST HTTP 等.. 可以为空 /省略默认空值为GET
+     * @param response 请求返回的实体类 如user.class  可为省略
+     * @param dataListener 成功失败的回调 不能为空/或者去省略
+     * @param <T>
+     */
     public static <T> void sendJsonRequest(String url, T requestInfo, String method, Class response, ResponseEntity dataListener) {
         if (url == null) {
             new Throwable(new RuntimeException() + "URL can`t null");

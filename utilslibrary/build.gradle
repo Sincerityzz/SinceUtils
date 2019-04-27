@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.novoda.bintray-release'
 android {
     compileSdkVersion 28
 
@@ -22,14 +22,24 @@ android {
     }
     lintOptions {
         abortOnError false
-}
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.alibaba:fastjson:1.2.57'
+    implementation 'com.alibaba:fastjson:1.2.57.android'
+
+}
+
+/** 以下开始是将Android Library上传到jcenter的相关配置**/
+publish {
+    userOrg = 'sincerityzz' //bintray账户下某个组织id
+    groupId = 'com.sincerity' //maven仓库下库的包名，一般为模块包名
+    artifactId = 'SinceTools' //项目名称
+    publishVersion = '1.0.1' //版本号
+    desc = 'Android Tools Collection' //项目介绍，可以不写
+    website = 'https://github.com/Sincerityzz' //项目主页，可以不写
 }
