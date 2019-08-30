@@ -1,9 +1,11 @@
 package com.sincerity.utilslibrary.view.BannerView;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -27,6 +29,10 @@ public class BannerView extends RelativeLayout {
     private Drawable mIndicatorFocusDrawable;
     private Drawable mIndicatorNormalDrawable;
     private int mCurrentIndex = 0;
+    private int mDotGravity = 0; //默认指示器的显示位置
+    private int mDotSize = 8;//默认指示器的大小
+    private int mDotSpacing = 2;
+    private int mDotBoottomColor;
 
     public BannerView(Context context) {
         this(context, null);
@@ -41,11 +47,35 @@ public class BannerView extends RelativeLayout {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
         //把布局加载到这个View中
+        mDotBoottomColor = ContextCompat.getColor(mContext, R.color.gray_translucent);
         inflate(context, R.layout.view_banner, this);
         initViews();
+        initAttributeSet(attrs);
         //设置默认的指示器颜色
-        mIndicatorFocusDrawable = new ColorDrawable(Color.RED);
-        mIndicatorNormalDrawable = new ColorDrawable(Color.WHITE);
+    }
+
+    private void initAttributeSet(AttributeSet attrs) {
+        //获取自定义的属性
+        TypedArray array = mContext.obtainStyledAttributes(attrs, R.styleable.BannerView);
+        //获取指示器的位置 如果没有默认为左边
+        mDotGravity = array.getInt(R.styleable.BannerView_dotIndicatorGravity, mDotGravity);
+        //当前指示器的颜色
+        mIndicatorFocusDrawable = array.getDrawable(R.styleable.BannerView_dotIndicatorFocus);
+        if (mIndicatorFocusDrawable == null) {
+            mIndicatorFocusDrawable = new ColorDrawable(Color.RED);
+        }
+        //正常指示器的颜色
+        mIndicatorNormalDrawable = array.getDrawable(R.styleable.BannerView_dotIndicatorNormal);
+        if (mIndicatorNormalDrawable == null) {
+            mIndicatorNormalDrawable = new ColorDrawable(Color.WHITE);
+        }
+        //指示器的大小
+        mDotSize = (int) array.getDimension(R.styleable.BannerView_dotIndicatorSize, dip2px(mDotSize));
+        //指示器的间隔
+        mDotSpacing = (int) array.getDimension(R.styleable.BannerView_dotIndicatorSpacing, dip2px(mDotSpacing));
+        //指示器底部的背景颜色
+        mDotBoottomColor = array.getColor(R.styleable.BannerView_bottomColor, mDotBoottomColor);
+        array.recycle();
     }
 
     //初始化View
@@ -91,14 +121,16 @@ public class BannerView extends RelativeLayout {
     private void initDotIndicator() {
         int count = mBannerAdapter.getCount();
         //设置指示器的位置在右边
-        mPointContainer.setGravity(Gravity.RIGHT);
+        mPointContainer.setGravity(getDotGravity());
+        mPointContainer.setBackgroundColor(mDotBoottomColor);
         //循环去添加点的指示器
         for (int i = 0; i < count; i++) {
             DotIndicatorView mDot = new DotIndicatorView(mContext);
             //设置大小
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(dip2px(8), dip2px(8));
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(mDotSize, mDotSize);
             //设置点的间隔
-            layoutParams.leftMargin = layoutParams.rightMargin = dip2px(2);
+            layoutParams.leftMargin = layoutParams.rightMargin = dip2px(mDotSpacing);
+
             mDot.setLayoutParams(layoutParams);
             //设置指示器的颜色
             if (i == 0) {
@@ -111,6 +143,19 @@ public class BannerView extends RelativeLayout {
         }
     }
 
+    //获取指示器的位置
+    private int getDotGravity() {
+        switch (mDotGravity) {
+            case 0:
+                return Gravity.LEFT;
+            case 1:
+                return Gravity.CENTER;
+            case 2:
+                return Gravity.RIGHT;
+        }
+        return Gravity.LEFT;
+    }
+
     //dp转px
     private int dip2px(int dp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
@@ -120,11 +165,13 @@ public class BannerView extends RelativeLayout {
     public void startAutoScroll() {
         mBannerVp.startSColl();
     }
-        //设置自动滚动的速率
+
+    //设置自动滚动的速率
     public void setScrollerDuration(int i) {
         mBannerVp.setScrollerDuration(i);
     }
-        //设置默认的滚动间隔
+
+    //设置默认的滚动间隔
     public void setCurrentSecond(int i) {
         mBannerVp.setCurrentSecond(i);
     }
