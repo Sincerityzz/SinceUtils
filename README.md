@@ -65,7 +65,55 @@
      */
  public static <T> void sendJsonRequest(String url, T requestInfo, String method, Class response, ResponseEntity dataListener)
 ```
+### 3. BannerView 实现无限轮播
+```java
+ //设置适配器
+ mBannerView.setBannerAdapter(new BannerAdapter() {
+            @Override
+            public View getView(int position) { //返回的是ViewPager的ItemView
+                ImageView view = new ImageView(MainActivity.this);
+                String imagePath = bean.getData().get(position).getImagePath();
+                Glide.with(MainActivity.this).load(imagePath).centerCrop().into(view);
+                return view;
+            }
+
+            @Override
+            public int getCount() {
+                return bean.getData().size(); //这里返回的Item的总条目
+            }
+
+            @Override
+            public String getBannerDesc(int position) {
+                return bean.getData().get(position).getTitle(); //返回的是Banner的页面描述 如果没有描述可以忽略
+            }
+        });
+        mBannerView.setScrollerDuration(950); //设置动画的播放速率
+        mBannerView.setCurrentSecond(3500); //设置间隔
+        mBannerView.startAutoScroll();//开启无限轮播
+```
+添加自定义属性 
+```xml
+  <!--指示器的颜色-->
+        <attr name="dotIndicatorFocus" format="color|reference" />
+        <attr name="dotIndicatorNormal" format="color|reference" />
+        <!--指示器大小-->
+        <attr name="dotIndicatorSize" format="dimension" />
+        <!--指示器的间距-->
+        <attr name="dotIndicatorSpacing" format="dimension" />
+        <!--指示器的位置-->
+        <attr name="dotIndicatorGravity" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <!--底部颜色-->
+        <attr name="bottomColor" format="color" />
+```
 后续会持续更新和对本库的bug修正
 
 ## 历史版本 
 ### 1.0.1 最初版本 实现基础ioc 和基础Volley功能 
+
+
+---
+### [我的简书](https://www.jianshu.com/u/ebad2728e6c7)
