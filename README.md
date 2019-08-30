@@ -91,6 +91,24 @@
         mBannerView.setCurrentSecond(3500); //设置间隔
         mBannerView.startAutoScroll();//开启无限轮播
 ```
+添加自定义属性 
+```xml
+  <!--指示器的颜色-->
+        <attr name="dotIndicatorFocus" format="color|reference" />
+        <attr name="dotIndicatorNormal" format="color|reference" />
+        <!--指示器大小-->
+        <attr name="dotIndicatorSize" format="dimension" />
+        <!--指示器的间距-->
+        <attr name="dotIndicatorSpacing" format="dimension" />
+        <!--指示器的位置-->
+        <attr name="dotIndicatorGravity" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <!--底部颜色-->
+        <attr name="bottomColor" format="color" />
+```
 后续会持续更新和对本库的bug修正
 
 ## 历史版本 
