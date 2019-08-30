@@ -65,6 +65,32 @@
      */
  public static <T> void sendJsonRequest(String url, T requestInfo, String method, Class response, ResponseEntity dataListener)
 ```
+### 3. BannerView 实现无限轮播
+```java
+ //设置适配器
+ mBannerView.setBannerAdapter(new BannerAdapter() {
+            @Override
+            public View getView(int position) { //返回的是ViewPager的ItemView
+                ImageView view = new ImageView(MainActivity.this);
+                String imagePath = bean.getData().get(position).getImagePath();
+                Glide.with(MainActivity.this).load(imagePath).centerCrop().into(view);
+                return view;
+            }
+
+            @Override
+            public int getCount() {
+                return bean.getData().size(); //这里返回的Item的总条目
+            }
+
+            @Override
+            public String getBannerDesc(int position) {
+                return bean.getData().get(position).getTitle(); //返回的是Banner的页面描述 如果没有描述可以忽略
+            }
+        });
+        mBannerView.setScrollerDuration(950); //设置动画的播放速率
+        mBannerView.setCurrentSecond(3500); //设置间隔
+        mBannerView.startAutoScroll();//开启无限轮播
+```
 后续会持续更新和对本库的bug修正
 
 ## 历史版本 
