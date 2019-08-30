@@ -6,6 +6,11 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <com.sincerity.utilslibrary.view.BannerView.BannerView
+        android:id="@+id/banner_view"
+        android:layout_width="match_parent"
+        android:layout_height="140dp" />
+
     <Button
         android:id="@+id/btn_request"
         android:layout_width="match_parent"
