@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -31,8 +30,10 @@ public class BannerView extends RelativeLayout {
     private int mCurrentIndex = 0;
     private int mDotGravity = 0; //默认指示器的显示位置
     private int mDotSize = 8;//默认指示器的大小
-    private int mDotSpacing = 2;
-    private int mDotBoottomColor;
+    private int mDotSpacing = 2;//指示器的间隔
+    private int mDotBottomColor = Color.TRANSPARENT; //默认底部颜色
+    private RelativeLayout mBottomView;
+    private float mWidthProportion, mHeightProportion;//宽高比例
 
     public BannerView(Context context) {
         this(context, null);
@@ -47,11 +48,16 @@ public class BannerView extends RelativeLayout {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
         //把布局加载到这个View中
-        mDotBoottomColor = ContextCompat.getColor(mContext, R.color.gray_translucent);
         inflate(context, R.layout.view_banner, this);
-        initViews();
         initAttributeSet(attrs);
+        initViews();
         //设置默认的指示器颜色
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
     }
 
     private void initAttributeSet(AttributeSet attrs) {
@@ -74,7 +80,9 @@ public class BannerView extends RelativeLayout {
         //指示器的间隔
         mDotSpacing = (int) array.getDimension(R.styleable.BannerView_dotIndicatorSpacing, dip2px(mDotSpacing));
         //指示器底部的背景颜色
-        mDotBoottomColor = array.getColor(R.styleable.BannerView_bottomColor, mDotBoottomColor);
+        mDotBottomColor = array.getColor(R.styleable.BannerView_bottomColor, mDotBottomColor);
+        mWidthProportion = array.getFloat(R.styleable.BannerView_widthProportion, mWidthProportion);
+        mHeightProportion = array.getFloat(R.styleable.BannerView_heightProportion, mHeightProportion);
         array.recycle();
     }
 
@@ -83,6 +91,8 @@ public class BannerView extends RelativeLayout {
         mBannerVp = findViewById(R.id.banner_vp);
         mTvBannerDesc = findViewById(R.id.banner_desc_tv);
         mPointContainer = findViewById(R.id.point_container);
+        mBottomView = findViewById(R.id.bottom_view);
+        mBottomView.setBackgroundColor(mDotBottomColor);
     }
 
     /**
@@ -102,6 +112,13 @@ public class BannerView extends RelativeLayout {
         //初始化第一次的Banner描述
         String mFirstDesc = mBannerAdapter.getBannerDesc(0);
         mTvBannerDesc.setText(mFirstDesc);
+        if (mWidthProportion == 0 || mHeightProportion == 0) {
+            return;
+        }
+        //动态计算高度
+        int width = getMeasuredWidth();
+        int height = (int) (width * mHeightProportion / mWidthProportion);
+        getLayoutParams().height = height;
     }
 
     private void pagerSelected(int position) {
@@ -122,7 +139,6 @@ public class BannerView extends RelativeLayout {
         int count = mBannerAdapter.getCount();
         //设置指示器的位置在右边
         mPointContainer.setGravity(getDotGravity());
-        mPointContainer.setBackgroundColor(mDotBoottomColor);
         //循环去添加点的指示器
         for (int i = 0; i < count; i++) {
             DotIndicatorView mDot = new DotIndicatorView(mContext);

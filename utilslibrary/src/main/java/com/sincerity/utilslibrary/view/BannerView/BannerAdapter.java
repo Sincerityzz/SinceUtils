@@ -13,7 +13,7 @@ public abstract class BannerAdapter {
      * @param position
      * @return
      */
-    public abstract View getView(int position);
+    public abstract View getView(int position,View mConvertView);
 
     //获取轮播的数量
     public abstract int getCount();

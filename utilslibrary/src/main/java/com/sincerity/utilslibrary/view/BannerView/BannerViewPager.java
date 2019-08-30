@@ -1,5 +1,7 @@
 package com.sincerity.utilslibrary.view.BannerView;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +14,8 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -25,9 +29,11 @@ public class BannerViewPager extends ViewPager {
     private static String TAG = "BannerView";
     /*自定义页面切换的速率*/
     private BannerScroller scroller;
+    //界面的复用 内存优化仿照ListView的Item复用
+    private List<View> mConvertViews;
+    private Activity mActivity; //内存优化当前的Activity
 
     /**
-     *
      * @param mCurrentSecond 设置滚动的间隔时间
      */
     public void setCurrentSecond(int mCurrentSecond) {
@@ -45,12 +51,14 @@ public class BannerViewPager extends ViewPager {
         }
     };
 
+
     public BannerViewPager(Context context) {
         this(context, null);
     }
 
     public BannerViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mActivity = (Activity) context;
         //改变ViewPager的切换速率 反射
         try {
             Field field = ViewPager.class.getDeclaredField("mScroller");
@@ -64,10 +72,10 @@ public class BannerViewPager extends ViewPager {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        mConvertViews = new ArrayList<>();
     }
 
     /**
-     *
      * @param mScrollerDuration 滚动的速率
      */
     public void setScrollerDuration(int mScrollerDuration) {
@@ -82,6 +90,8 @@ public class BannerViewPager extends ViewPager {
     public void setAdapter(BannerAdapter adapter) {
         this.mAdapter = adapter;
         setAdapter(new BannerPagerAdapter());
+        //管理Activity的生命周期
+        mActivity.getApplication().registerActivityLifecycleCallbacks(callbacks);
     }
 
     /**
@@ -92,6 +102,7 @@ public class BannerViewPager extends ViewPager {
         mHandler.sendEmptyMessageDelayed(MSG_SCROLLER, mCurrentSecond);
 
     }
+
     //创建适配器
     private class BannerPagerAdapter extends PagerAdapter {
 
@@ -113,14 +124,14 @@ public class BannerViewPager extends ViewPager {
          * 创建ItemView的方法
          *
          * @param container viewPager
-         * @param position 当前的位置
+         * @param position  当前的位置
          * @return
          */
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
             //采用Adapter适配模式,为了完全让用户自定义   position的变化值为0-65566
-            View ItemView = mAdapter.getView(position % mAdapter.getCount());
+            View ItemView = mAdapter.getView(position % mAdapter.getCount(), getConvertView());
             container.addView(ItemView);
             return ItemView;
         }
@@ -129,14 +140,33 @@ public class BannerViewPager extends ViewPager {
          * 销毁ItemView的方法
          *
          * @param container ViewPager
-         * @param position 当前位置
-         * @param object ItemView
+         * @param position  当前位置
+         * @param object    ItemView
          */
         @Override
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             container.removeView((View) object);
-            object = null;
+            mConvertViews.add((View) object);
         }
+    }
+
+    /**
+     * 获取复用的界面
+     *
+     * @return View
+     */
+    private View getConvertView() {
+        /**
+         * The specified child already has a parent.
+         * You must call removeView() on the child's parent first.
+         */
+        for (int i = 0; i < mConvertViews.size(); i++) {
+            //获取没有添加在ViewPager的界面
+            if (mConvertViews.get(i).getParent() == null) {
+                return mConvertViews.get(i);
+            }
+        }
+        return null;
     }
 
     /**
@@ -145,8 +175,28 @@ public class BannerViewPager extends ViewPager {
      */
     @Override
     protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
+        //移除消息置空mHandler
         mHandler.removeMessages(MSG_SCROLLER);
         mHandler = null;
+        //反注册Activity的生命周期监听
+        mActivity.getApplication().unregisterActivityLifecycleCallbacks(callbacks);
+        super.onDetachedFromWindow();
     }
+
+    Application.ActivityLifecycleCallbacks callbacks = new DefalutActivityLifecyelCallbacks() {
+        @Override
+        public void onActivityResumed(Activity activity) {
+            //判断是不是当前的Activity生命周期
+            if (activity == getContext())
+                //开始轮播
+                mHandler.sendEmptyMessageDelayed(mCurrentSecond, MSG_SCROLLER);
+        }
+
+        @Override
+        public void onActivityPaused(Activity activity) {
+            if (activity == getContext())
+                //停止轮播
+                mHandler.removeMessages(MSG_SCROLLER);
+        }
+    };
 }

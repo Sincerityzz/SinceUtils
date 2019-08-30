@@ -9,6 +9,7 @@
         android:layout_height="match_parent" />
 
     <RelativeLayout
+        android:id="@+id/bottom_view"
         android:background="@color/gray_translucent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -52,6 +52,7 @@ public class DotIndicatorView extends View {
             Bitmap circleBitmap = BitmapToCircleBitMap(bitmap);
             //绘制圆形bitmap
             canvas.drawBitmap(circleBitmap, 0, 0, null);
+
         }
     }
 
@@ -69,6 +70,8 @@ public class DotIndicatorView extends View {
         canvas.drawCircle(getMeasuredHeight() / 2, getMeasuredHeight() / 2, getMeasuredWidth() / 2, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN)); //取bitmap和圆形的交集
         canvas.drawBitmap(bitmap, 0, 0, paint);
+        bitmap.recycle(); //回收BitMap
+        bitmap = null;
         return circleBitmap;
     }
 

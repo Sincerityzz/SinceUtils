@@ -45,8 +45,13 @@ public class MainActivity extends AppCompatActivity {
     private void initBannerView(final ImageBean bean) {
         mBannerView.setBannerAdapter(new BannerAdapter() {
             @Override
-            public View getView(int position) {
-                ImageView view = new ImageView(MainActivity.this);
+            public View getView(int position, View mConvertView) {
+                ImageView view;
+                if (mConvertView == null) {
+                    view = new ImageView(MainActivity.this);
+                } else {
+                    view = (ImageView) mConvertView;
+                }
                 String imagePath = bean.getData().get(position).getImagePath();
                 Glide.with(MainActivity.this).load(imagePath).centerCrop().into(view);
                 return view;
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 return bean.getData().get(position).getTitle();
             }
         });
-        mBannerView.setScrollerDuration(950); //设置动画的播放速率
+        mBannerView.setScrollerDuration(500); //设置动画的播放速率
         mBannerView.setCurrentSecond(3500); //设置间隔
         mBannerView.startAutoScroll();//开启无限轮播
     }
