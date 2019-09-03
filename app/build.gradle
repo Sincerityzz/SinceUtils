@@ -26,5 +26,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 
+
 //    implementation 'com.sincerity:SinceTools:1.0.1'
 }

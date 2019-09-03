@@ -1,4 +1,4 @@
-package com.sincerity.utilslibrary.http;
+package com.sincerity.utilslibrary.http.volley;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;

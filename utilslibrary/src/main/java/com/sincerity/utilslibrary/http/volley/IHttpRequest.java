@@ -1,4 +1,4 @@
-package com.sincerity.utilslibrary.http;
+package com.sincerity.utilslibrary.http.volley;
 
 import java.io.InputStream;
 
