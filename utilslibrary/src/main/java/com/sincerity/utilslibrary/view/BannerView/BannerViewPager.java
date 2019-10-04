@@ -183,7 +183,10 @@ public class BannerViewPager extends ViewPager {
         super.onDetachedFromWindow();
     }
 
-    Application.ActivityLifecycleCallbacks callbacks = new DefalutActivityLifecyelCallbacks() {
+    /**
+     * 添加对Activity的生命周期的监听
+     */
+    Application.ActivityLifecycleCallbacks callbacks = new DefaultActivityLifecycleCallbacks() {
         @Override
         public void onActivityResumed(Activity activity) {
             //判断是不是当前的Activity生命周期

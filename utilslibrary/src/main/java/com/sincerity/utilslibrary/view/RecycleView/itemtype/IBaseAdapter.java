@@ -1,4 +1,4 @@
-package com.sincerity.baseadapterlib.itemtype;
+package com.sincerity.utilslibrary.view.RecycleView.itemtype;
 
 import android.view.View;
 

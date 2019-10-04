@@ -1,4 +1,4 @@
-package com.sincerity.utilslibrary.view;
+package com.sincerity.utilslibrary.view.indicator;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -19,8 +19,6 @@ public class ColorTrackTextView extends AppCompatTextView {
     private float mCurrentPosition = 0.0f;//设置默认的颜色改变位置
     // 当前朝向
     private Direction mDirection = Direction.DIRECTION_LEFT;
-    private int mFontColor = Color.BLACK;
-    private int mBehindColor = Color.RED;
 
     // 绘制的朝向枚举
     public enum Direction {
@@ -62,7 +60,9 @@ public class ColorTrackTextView extends AppCompatTextView {
      * 初始化画笔
      */
     private void initPaint() {
+        int mFontColor = Color.BLACK;
         mOriginPaint = getPaintColor(mFontColor);
+        int mBehindColor = Color.RED;
         mChangePaint = getPaintColor(mBehindColor);
     }
 
@@ -87,13 +87,17 @@ public class ColorTrackTextView extends AppCompatTextView {
         int middle = (int) (getWidth() * mCurrentPosition);//得到需要改变颜色的位置
         if (mDirection == Direction.DIRECTION_LEFT) {  // 左边是红色右边是黑色
             // 绘制变色
-            drawText(canvas, mChangePaint, 0, middle);
-            drawText(canvas, mOriginPaint, middle, getWidth());
+//            drawText(canvas, mChangePaint, 0, middle);
+            drawChangeDirectionLeft(canvas,middle);
+//            drawText(canvas, mOriginPaint, middle, getWidth());
+            drawOriginDirectionLeft(canvas,middle);
         } else {
             // 右边是红色左边是黑色
-            drawText(canvas, mChangePaint, getWidth() - middle, getWidth());
+            drawChangeDirectionRight(canvas, middle);
+//            drawText(canvas, mChangePaint, getWidth() - middle, getWidth());
             // 绘制变色
-            drawText(canvas, mOriginPaint, 0, getWidth() - middle);
+            drawOriginDirectionRight(canvas, middle);
+//            drawText(canvas, mOriginPaint, 0, getWidth() - middle);
         }
     }
 
@@ -169,7 +173,7 @@ public class ColorTrackTextView extends AppCompatTextView {
         int offY = fontTotalHeight / 2 - fontMetrics.bottom;
         // 计算基线位置
         int baseline = (getMeasuredHeight() + fontTotalHeight) / 2 - offY;
-        canvas.drawText(mText, getMeasuredWidth() / 2 - bounds.width() / 2, baseline, mPaint);
+        canvas.drawText(mText, (getMeasuredWidth() >> 1) - (bounds.width() >> 1), baseline, mPaint);
         // 释放画笔状态
         canvas.restore();
     }

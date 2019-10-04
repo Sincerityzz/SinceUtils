@@ -1,75 +1,90 @@
 package com.sincerity.sinceutils;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ImageView;
+import android.support.v4.app.Fragment;
+import android.widget.RadioButton;
 
-import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.sincerity.utilslibrary.http.volley.ResponseEntity;
-import com.sincerity.utilslibrary.http.volley.SVolley;
+import com.sincerity.sinceutils.fragment.FoundPage;
+import com.sincerity.sinceutils.fragment.HomePage;
+import com.sincerity.sinceutils.fragment.MyInfoPage;
+import com.sincerity.sinceutils.fragment.NewsPage;
+import com.sincerity.utilslibrary.base.BaseActivity;
 import com.sincerity.utilslibrary.ioc.BindView;
+import com.sincerity.utilslibrary.ioc.OnClick;
 import com.sincerity.utilslibrary.ioc.ViewUtils;
-import com.sincerity.utilslibrary.view.BannerView.BannerAdapter;
-import com.sincerity.utilslibrary.view.BannerView.BannerView;
+import com.sincerity.utilslibrary.utils.FragmentMangerHelper;
 
-public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.banner_view)
-    BannerView mBannerView;
-
+public class MainActivity extends BaseActivity {
+    @BindView(R.id.home)
+    RadioButton mHome;
+    @BindView(R.id.news)
+    RadioButton mNews;
+    @BindView(R.id.found)
+    RadioButton mFound;
+    @BindView(R.id.myInfo)
+    RadioButton mMy;
     private String url = "https://wanandroid.com/wxarticle/chapters/json";
     private String BannerUrl = "https://www.wanandroid.com/banner/json";
+    private String TAG = MainActivity.class.getSimpleName();
+    private FragmentMangerHelper mFragmentManger;
+    private Fragment mHomePage, mNewsPage, mFoundPage, mMyInfoPage;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ViewUtils.bind(this);
-        SVolley.sendJsonRequest(BannerUrl, null, new ResponseEntity() {
-            @Override
-            public void onSuccess(Object object) {
-                ImageBean imageBeanList = new Gson().fromJson(object.toString(), new TypeToken<ImageBean>() {
-                }.getType());
-                initBannerView(imageBeanList);
-            }
-
-            @Override
-            public void onFail(String errorString) {
-
-            }
-        });
+    protected int setContentView() {
+        return R.layout.activity_main;
     }
 
-    private void initBannerView(final ImageBean bean) {
-        mBannerView.setBannerAdapter(new BannerAdapter() {
-            @Override
-            public View getView(int position, View mConvertView) {
-                ImageView view;
-                if (mConvertView == null) {
-                    view = new ImageView(MainActivity.this);
-                } else {
-                    view = (ImageView) mConvertView;
-                }
-                String imagePath = bean.getData().get(position).getImagePath();
-                Glide.with(MainActivity.this).load(imagePath).centerCrop().into(view);
-                return view;
-            }
+    @Override
+    protected void initActionBar() {
+        ViewUtils.bind(this);
+    }
 
-            @Override
-            public int getCount() {
-                return bean.getData().size();
-            }
+    @Override
+    protected void initViews() {
+        mFragmentManger = new FragmentMangerHelper(getSupportFragmentManager(), R.id.home_container);
+        mHomePage = new HomePage();
+        mFragmentManger.addFragment(mHomePage);
+    }
 
-            @Override
-            public String getBannerDesc(int position) {
-                return bean.getData().get(position).getTitle();
-            }
-        });
-        mBannerView.setScrollerDuration(500); //设置动画的播放速率
-        mBannerView.setCurrentSecond(3500); //设置间隔
-        mBannerView.startAutoScroll();//开启无限轮播
+    @Override
+    protected void initListener() {
+
+    }
+
+    @OnClick(R.id.home)
+    public void onHomeClick() {
+        if (mHomePage == null) {
+            mHomePage = new HomePage();
+        }
+        mFragmentManger.switchFragment(mHomePage);
+    }
+
+    @OnClick(R.id.news)
+    public void onNewsClick() {
+        if (mNewsPage == null) {
+            mNewsPage = new NewsPage();
+        }
+        mFragmentManger.switchFragment(mNewsPage);
+    }
+
+    @OnClick(R.id.found)
+    public void onFoundClick() {
+        if (mFoundPage == null) {
+            mFoundPage = new FoundPage();
+        }
+        mFragmentManger.switchFragment(mFoundPage);
+    }
+
+    @OnClick(R.id.myInfo)
+    public void onMyInfoClick() {
+        if (mMyInfoPage == null) {
+            mMyInfoPage = new MyInfoPage();
+        }
+        mFragmentManger.switchFragment(mMyInfoPage);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
 }

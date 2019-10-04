@@ -1,4 +1,4 @@
-package com.sincerity.sinceutils;
+package com.sincerity.sinceutils.utils;
 
 import android.Manifest;
 import android.content.Context;

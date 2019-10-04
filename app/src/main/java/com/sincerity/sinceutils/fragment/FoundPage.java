@@ -6,5 +6,5 @@ import android.support.v4.app.Fragment;
  * Created by Sincerity on 2019/9/6.
  * 描述：
  */
-public class HomePage extends Fragment {
+public class FoundPage extends Fragment {
 }

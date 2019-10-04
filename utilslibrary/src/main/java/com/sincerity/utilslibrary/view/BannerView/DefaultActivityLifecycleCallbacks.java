@@ -8,7 +8,7 @@ import android.os.Bundle;
  * Created by Sincerity on 2019/8/30.
  * 描述：Activity生命周期管理 回调
  */
-public class DefalutActivityLifecyelCallbacks implements Application.ActivityLifecycleCallbacks {
+public class DefaultActivityLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
 

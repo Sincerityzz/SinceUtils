@@ -1,14 +1,13 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
+apply plugin: "guru.stefma.bintrayrelease"
 android {
     compileSdkVersion 28
-
-
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -21,6 +20,7 @@ android {
         }
     }
     lintOptions {
+        checkReleaseBuilds false
         abortOnError false
     }
 }
@@ -33,14 +33,24 @@ dependencies {
     implementation 'org.xutils:xutils:3.5.3'
     implementation 'com.squareup.okhttp3:okhttp:4.1.0'
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
 }
 
 /** 以下开始是将Android Library上传到jcenter的相关配置**/
+version = "1.0.2" //版本号
+group = "com.sincerity" //jcenter的路径
 publish {
-    userOrg = 'sincerityzz' //bintray账户下某个组织id
-    groupId = 'com.sincerity' //maven仓库下库的包名，一般为模块包名
-    artifactId = 'SinceTools' //项目名称
-    publishVersion = '1.0.1' //版本号
-    desc = 'Android Tools Collection' //项目介绍，可以不写
-    website = 'https://github.com/Sincerityzz' //项目主页，可以不写
+    userOrg = 'sincerityzz' //bintray用户名
+    repoName = 'maven'  //要传过去的库名 创建仓库时，如果使用Bintray-release,名字就填成maven
+    artifactId = 'SinceTools'  //要传过去的项目名
+    desc = 'Android Tools Collection' //描述
+    website = 'https://github.com/Sincerityzz' //
 }
+//publish {
+//    userOrg = 'sincerityzz' //bintray账户下某个组织id
+//    groupId = 'com.sincerity' //maven仓库下库的包名，一般为模块包名
+//    artifactId = 'SinceTools' //项目名称
+//    publishVersion = '1.0.2' //版本号
+//    desc = 'Android Tools Collection' //项目介绍，可以不写
+//    website = 'https://github.com/Sincerityzz' //项目主页，可以不写
+//}

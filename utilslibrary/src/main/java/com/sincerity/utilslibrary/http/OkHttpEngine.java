@@ -21,12 +21,14 @@ public class OkHttpEngine implements IHttpEngine {
     @Override
     public void post(String url, Map<String, String> params, final HttpCallBack httpCallBack) {
         FormBody.Builder body = new FormBody.Builder();
-
-        Iterator<Map.Entry<String, String>> iterator = params.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, String> entry =  iterator.next();
-            body.add(entry.getKey(), entry.getValue());
+        if (params != null) {
+            Iterator<Map.Entry<String, String>> iterator = params.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<String, String> entry = iterator.next();
+                body.add(entry.getKey(), entry.getValue());
+            }
         }
+
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)

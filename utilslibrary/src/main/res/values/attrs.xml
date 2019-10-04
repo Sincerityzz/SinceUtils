@@ -17,8 +17,15 @@
         <!--底部颜色-->
         <attr name="bottomColor" format="color" />
         <!--定义宽高比-->
-        <attr name="widthProportion" format="float"/>
-        <attr name="heightProportion" format="float"/>
+        <attr name="widthProportion" format="float" />
+        <attr name="heightProportion" format="float" />
 
+    </declare-styleable>
+    <declare-styleable name="TrackIndicatorView">
+        <attr name="tabWidth" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="ColorTrackTextView">
+        <attr name="originColor" format="color" />
+        <attr name="changeColor" format="color" />
     </declare-styleable>
 </resources>
