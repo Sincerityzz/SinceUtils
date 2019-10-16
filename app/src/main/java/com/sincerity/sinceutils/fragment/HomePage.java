@@ -70,7 +70,9 @@ public class HomePage extends Fragment {
                     return;
                 }
                 String imei = telephonyManager.getDeviceId();
-                mTvShow.setText("IMEI" + getDeviceId(getActivity()) + "\n" + "IMEI" + imei + "\n" + "IMEI" + (new AppUtils(getActivity()).getUniqueID()));
+                mTvShow.setText("IMEI" + getDeviceId(getActivity()) + "\n" +
+                        "IMEI" + imei + "\n"
+                        + "IMEI" + (new AppUtils(getActivity()).getUniqueID()));
             }
         });
         mIndicators = new ArrayList<>();
@@ -203,8 +205,6 @@ public class HomePage extends Fragment {
 
             @Override
             public void resetColor(ColorTrackTextView view) {
-//                ColorTrackTextView colorTrackTextView = new ColorTrackTextView(getActivity());
-//                colorTrackTextView.setFontColor(Color.BLACK);
                 view.setDirection(ColorTrackTextView.Direction.DIRECTION_RIGHT);
                 view.setCurrentProgress(0);
             }

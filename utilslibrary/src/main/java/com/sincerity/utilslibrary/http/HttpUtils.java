@@ -18,8 +18,8 @@ public class HttpUtils {
     public HttpUtils() {
 
         //这里用来切换引擎
-//        httpEngine = new XUtilsEngine();
-        httpEngine = new OkHttpEngine();
+        httpEngine = new XUtilsEngine();
+//        httpEngine = new OkHttpEngine();
     }
 
 

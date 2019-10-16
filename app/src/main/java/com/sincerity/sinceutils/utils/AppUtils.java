@@ -152,6 +152,7 @@ public class AppUtils {
             m_szUniqueID += Integer.toHexString(b);
         }   // hex string to uppercase
         m_szUniqueID = m_szUniqueID.toUpperCase();
-        return m_szUniqueID;
+
+        return m_szUniqueID.substring(8,22);
     }
 }

@@ -25,10 +25,12 @@ public class XUtilsEngine implements IHttpEngine {
     public void post(String url, Map<String, String> params, final HttpCallBack httpCallBack) {
 //  封装url参数
         RequestParams requestParams = new RequestParams(url);
-        Iterator<Map.Entry<String, String>> iterator = params.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, String> entry = iterator.next();
-            requestParams.addParameter(entry.getKey(), entry.getValue());
+        if (params != null) {
+            Iterator<Map.Entry<String, String>> iterator = params.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<String, String> entry = iterator.next();
+                requestParams.addParameter(entry.getKey(), entry.getValue());
+            }
         }
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
             @Override
