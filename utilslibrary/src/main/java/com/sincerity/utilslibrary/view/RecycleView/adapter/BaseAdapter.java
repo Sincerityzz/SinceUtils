@@ -1,17 +1,19 @@
 package com.sincerity.utilslibrary.view.RecycleView.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sincerity.utilslibrary.view.RecycleView.adapter.itype.IAdapterListener;
 import com.sincerity.utilslibrary.view.RecycleView.adapter.itype.IAdapterListener.OnItemClickListener;
 import com.sincerity.utilslibrary.view.RecycleView.adapter.itype.IAdapterListener.onItemLongClickListener;
 import com.sincerity.utilslibrary.view.RecycleView.adapter.itype.MultTypeSupport;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -48,6 +50,14 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
     public BaseAdapter(Context context, List<T> data, MultTypeSupport typeSupport) {
         this(context, -1, data);
         this.mTypeSupport = typeSupport;
+    }
+
+    public void addAll(Collection c) {
+        if (mData.size() > 0) {
+            mData.clear();
+        }
+        mData.addAll(c);
+        notifyDataSetChanged();
     }
 
     @NonNull

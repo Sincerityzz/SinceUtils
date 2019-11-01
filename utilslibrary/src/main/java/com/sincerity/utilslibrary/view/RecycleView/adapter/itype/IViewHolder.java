@@ -1,6 +1,6 @@
 package com.sincerity.utilslibrary.view.RecycleView.adapter.itype;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Sincerity on 2019/3/29.

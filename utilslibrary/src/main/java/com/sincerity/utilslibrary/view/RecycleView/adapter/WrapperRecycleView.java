@@ -1,9 +1,10 @@
 package com.sincerity.utilslibrary.view.RecycleView.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -102,5 +103,30 @@ public class WrapperRecycleView extends RecyclerView {
         if (mAdapter != null) {
             mAdapter.removeFooterView(view);
         }
+    }
+
+    /**
+     * 设置兼容网格的头部
+     *
+     * @param maxCount
+     */
+    public void setGridLayoutSpanSizeLookUp(int maxCount) {
+        //得到当前的layoutManager
+        LayoutManager layoutManager = getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            //强转为GridLayoutManager
+            GridLayoutManager manager = (GridLayoutManager) layoutManager;
+            manager.setSpanSizeLookup(mAdapter.obtainGridSpanSizeLookUp(maxCount));
+            setLayoutManager(manager);
+        }
+
+    }
+
+    public int getHeaderCount() {
+        return mAdapter.getHeaderCount();
+    }
+
+    public int getFooterCount() {
+        return mAdapter.getFooterCount();
     }
 }

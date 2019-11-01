@@ -1,17 +1,21 @@
 package com.sincerity.sinceutils;
 
-import android.support.v4.app.Fragment;
 import android.widget.RadioButton;
+
+import androidx.fragment.app.Fragment;
 
 import com.sincerity.sinceutils.fragment.FoundPage;
 import com.sincerity.sinceutils.fragment.HomePage;
 import com.sincerity.sinceutils.fragment.MyInfoPage;
 import com.sincerity.sinceutils.fragment.NewsPage;
+import com.sincerity.utilslibrary.ExceptionCrashHandler;
 import com.sincerity.utilslibrary.base.BaseActivity;
 import com.sincerity.utilslibrary.ioc.BindView;
 import com.sincerity.utilslibrary.ioc.OnClick;
 import com.sincerity.utilslibrary.ioc.ViewUtils;
 import com.sincerity.utilslibrary.utils.FragmentMangerHelper;
+
+import java.io.File;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.home)
@@ -84,7 +88,24 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        //获取上次异常的信息 上传到服务器
+        File crashFile = ExceptionCrashHandler.getInstance().getCrashFile();
+        if (crashFile.exists()) {
+            //上传到服务器
+//            try {
+//                InputStreamReader reader = new InputStreamReader(new FileInputStream(crashFile));
+//                char[] buffer = new char[1024];
+//                int len = 0;
+//                while ((len = reader.read(buffer)) != -1) {
+//                    String str = new String(buffer, 0, len);
+//                    Log.e("admin", str);
+//                }
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+        }
     }
 
 }

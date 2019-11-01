@@ -1,10 +1,12 @@
 package com.sincerity.utilslibrary.view.RecycleView.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+
+import static androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup;
 
 /**
  * Created by Sincerity on 2019/10/16.
@@ -40,7 +42,7 @@ public class WrapperRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView
             return createFooterViewHolder(mHeaders.get(viewType));
         }
 
-        return  mAdapter.onCreateViewHolder(viewGroup, viewType);
+        return mAdapter.onCreateViewHolder(viewGroup, viewType);
     }
 
     private RecyclerView.ViewHolder createFooterViewHolder(View view) {
@@ -58,7 +60,7 @@ public class WrapperRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView
         //头部都不用去处理
         int numHeaders = mHeaders.size();
         if (position < numHeaders) {
-            return ;
+            return;
         }
 
         //Adapter
@@ -122,6 +124,72 @@ public class WrapperRecycleViewAdapter extends RecyclerView.Adapter<RecyclerView
     public void removeFooterView(View view) {
         if (mFooters.indexOfValue(view) >= 0) {
             mFooters.removeAt(mFooters.indexOfValue(view));
+        }
+    }
+
+    public class GridSpanSizeLookup extends SpanSizeLookup {
+        private int mMaxCount;
+
+        GridSpanSizeLookup(int maxCount) {
+            this.mMaxCount = maxCount;
+        }
+
+        @Override
+        public int getSpanSize(int position) {
+            if (mHeaders.size() != 0) {
+                if (position < mHeaders.size()) {
+                    return mMaxCount;
+                }
+            }
+            if (mFooters.size() != 0) {
+                int i = position - mFooters.size() - mAdapter.getItemCount();
+                if (i >= 0) {
+                    return mMaxCount;
+                }
+            }
+            return 1;
+        }
+    }
+
+    public GridSpanSizeLookup obtainGridSpanSizeLookUp(int maxCount) {
+        return new GridSpanSizeLookup(maxCount);
+    }
+
+    //兼容显示问题
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        registerAdapterDataObserver(new FixDataObserver(recyclerView));
+    }
+
+    public int getFooterCount() {
+        return mFooters.size();
+    }
+
+    public int getHeaderCount() {
+        return mHeaders.size();
+    }
+
+    public int getCount() {
+        return mAdapter.getItemCount();
+    }
+
+    private class FixDataObserver extends RecyclerView.AdapterDataObserver {
+
+        private RecyclerView recyclerView;
+
+        FixDataObserver(RecyclerView recyclerView) {
+            this.recyclerView = recyclerView;
+        }
+
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            if (recyclerView.getAdapter() instanceof WrapperRecycleViewAdapter) {
+                WrapperRecycleViewAdapter adapter = (WrapperRecycleViewAdapter) recyclerView.getAdapter();
+                if (adapter.getFooterCount() > 0 && adapter.getCount() == itemCount) {
+                    recyclerView.scrollToPosition(0);
+                }
+            }
         }
     }
 }

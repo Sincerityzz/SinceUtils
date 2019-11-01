@@ -13,19 +13,19 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp" />
 
-    <android.support.v7.widget.AppCompatButton
+    <Button
         android:id="@+id/btnIMEI"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="getIMEI"
         android:text="获取手机IMEI" />
 
-    <android.support.v7.widget.AppCompatTextView
+    <TextView
         android:id="@+id/tv_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/mViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -7,19 +7,20 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatTextView;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.sincerity.sinceutils.R;
 import com.sincerity.sinceutils.utils.AppUtils;
@@ -40,8 +41,8 @@ public class HomePage extends Fragment {
     private TrackIndicatorView mIndicatorContainer;
 
     private ViewPager mViewPager;
-    private AppCompatButton mBtnIMEI;
-    private AppCompatTextView mTvShow;
+    private Button mBtnIMEI;
+    private TextView mTvShow;
     private String[] items = {"直播", "推荐", "直播", "推荐", "直播", "推荐", "直播", "推荐", "直播", "推荐"};
     private List<ColorTrackTextView> mIndicators;
     private String TAG = "HomePage";
@@ -50,10 +51,10 @@ public class HomePage extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home, container, false);
-        mViewPager = mView.findViewById(R.id.mViewPager);
-        mIndicatorContainer = mView.findViewById(R.id.indicator_view);
-        mBtnIMEI = mView.findViewById(R.id.btnIMEI);
-        mTvShow = mView.findViewById(R.id.tv_show);
+        mViewPager = (ViewPager) mView.findViewById(R.id.mViewPager);
+        mIndicatorContainer = (TrackIndicatorView) mView.findViewById(R.id.indicator_view);
+        mBtnIMEI = (Button) mView.findViewById(R.id.btnIMEI);
+        mTvShow = (TextView) mView.findViewById(R.id.tv_show);
         mBtnIMEI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +82,7 @@ public class HomePage extends Fragment {
         return mView;
     }
 
-    @SuppressLint("HardwareIds")
+    @SuppressLint({"HardwareIds", "ObsoleteSdkInt"})
     public static String getDeviceId(Context mContext) {
         String m_szDevIDShort = "35" + Build.BOARD.length() % 10
                 + Build.BRAND.length() % 10 + Build.CPU_ABI.length() % 10
@@ -93,7 +94,7 @@ public class HomePage extends Fragment {
 
         String serial = "serial";// 默认serial可随便定义
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= 28) {
                 if (ActivityCompat.checkSelfPermission(mContext,
                         Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
                     // 由于 Android Q 唯一标识符权限的更改会导致
@@ -213,9 +214,9 @@ public class HomePage extends Fragment {
             public View getTrackView() {
                 View view = new View(getActivity());
                 view.setBackgroundColor(Color.RED);
-                view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,3));
+                view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 3));
                 return view;
             }
-        }, mViewPager,false);
+        }, mViewPager, false);
     }
 }

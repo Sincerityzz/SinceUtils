@@ -1,26 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sincerity.sinceutils">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
     <application
         android:name=".BaseApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".KotlinActivity"></activity>
+
+        <meta-data
+            android:name="com.taobao.android.hotfix.IDSECRET"
+            android:value="28029246" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.APPSECRET"
+            android:value="b06d665d9f8e9e769c4f43475a3e3855" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.RSASECRET"
+            android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCawOF7wdcG1tA7hbxHXYkFScdy2iCCWo0Z/1vzg9bSaX56Gjeeu/DnylFcm5j0gLRxqCKKt52pyjz1Q/L5z4rdlcNax5qlxnzbfouwzCwFzVbzFCD0KxjiUz/C34ZjrwoSQBLb3O2dKn6BYrUhrjPuDfUS2IGvVR43SFMXwuUVpqqidsA+1P+s+f8yrijFyxJY9prEnWBM+k3V8ljHHYVJVtr58YSLa5Lkgyv30XLwT9o6HCCuLUfz4dcrp2N11BrTve9IfrkmMpSPBK349WH1crgfy2riLAbD8Jqm/mwsWrKezabAnivABd58cwDjoi9QNdaQFQUDVLiU+2hIB5ZVAgMBAAECggEBAIkwovSmpCyA9Ts/VOljZ1xTysfrzdQh2GMKuYaJA0GnmiM+6L4E2Q1zk2to2VEwZEc6Cd016ESkcCPyqA2ESxQjd3sb5uI9s2SWq9oBNqmyHvoBhzFOn5HMwYLNzALFI0WIne9hzRh+moWzbuY72/eXUgLyAw3fhJj3ugofkhz9LBNw9wdya1ih2RE8gqeFrg9B2ErHlY4aV85clb3lGXbgjLgySJ3hp3jmAZt5mjLxgnI9fe63z1D0/1xljqRz1t8363QpsD1MFild59EOdW8GHk6m+w40x69sEPjv+dCEnobdFseYY+cy0PfsfzhtuGj8ODc8H+LKjdjlpxuxDSECgYEA7s6JFWkAU4yg/J9G5I/TUrKTmNEB1vlVV0smU+Kww3hYemfhVAf4qtLhDrYpmBlOw6f9ieU7Z9s3p+W6ZV098Q8nsxXUNQRK1qzC9qVyboJOzs07HcRmEm1dmFEvxhnysArdaMFkxXZAwZGevzK1NxPDozi4DKBKAvvCerikc8kCgYEApeUm/slB92lk3mC97xO75UsCiMa/c1K8tXedXpRwP+tp4ht1qHAxN1yZdmkt1DgfyhMYgxICwXKFP/ifWperjv9SyQ6oSynvunDF2uFukv+uKCBJbppnx5iTr5peeZWBEp+XH1tt2qIYTXm+mECuOH1bRPkhDsIFgLQiOPDrXC0CgYBVTW1mOnWlYox28KYwKrf/yE40viP8GGBFqFBukoE1sZ1ZTBYPIDHRQzalPKiq7g9WkIFeaoXH2WSOEt98KcxgeVti+x8sOPZKrLePxxWTJ/TipijBv0/+sRZHvGhmSQqJm7fvHXXTmyQSgOPFxGU64VJ20WHdELyfSDL2B1KnEQKBgHptY1rSUfFxgTQvttux949ezO79pZpI6+UL8kIzT6eMZyarVyhIK7oMh2CAfIbKKIOrlgJcj1YN2tJ7+7YSilRMjt68B2z49OblhM5kYYLwV6lbMnYCUyZUrmEAjkoyEAAbcJ5+jdK0nzTF7OdVjH053dpH9KJ8gy0ZQsw816S9AoGAMPIsrd1IcbzwqBtpMjCn9nR+ahdvPjDUv1imQ3nKxbca+4AXYl7rjVyUckIg9NPuWfQU4AP4ucmnIPBcNTAUkrQANL9OpBLR3z/7a8NskNgMMDOUXKNMUNvcqU2rly41LEyNOyt5zzwTXDzm635USxJBxEFqLj1r3tRv0pwLREs=" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"
+            tools:ignore="WrongManifestParent" /> <!-- android:name="android.support.v4.content.FileProvider" -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.sincerity.sinceutils.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TestActivity" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
