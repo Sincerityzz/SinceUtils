@@ -109,6 +109,63 @@
         <!--底部颜色-->
         <attr name="bottomColor" format="color" />
 ```
+### 4. RecycleView 
+- 首先在XML中添加WrapperRecycleView
+```java
+    <com.sincerity.utilslibrary.view.RecycleView.adapter.WrapperRecycleView
+        android:id="@+id/rv_infoMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+```
+- 新建adapter
+```java
+class Adapter extends BaseAdapter<ChartData> {
+
+        public Adapter(Context context, List data) {
+        //多布局实现 单一布局不需要返回MultTypeSupport
+            super(context, data, new MultTypeSupport<ChartData>() {
+                @Override
+                public int getLayoutId(ChartData item) {
+                    if (item.isMe) {
+                        return R.layout.item_right;
+                    }
+                    return R.layout.item_left;
+                }
+            });
+        }
+
+
+        @Override
+        protected void setData(BaseViewHolder baseViewHolder, ChartData data, int i) {
+            if (data.isMe) {
+                baseViewHolder.setText(R.id.item_tv_right, data.chartContent);
+            } else {
+                baseViewHolder.setText(R.id.item_tv_left, data.chartContent);
+            }
+
+        }
+    }
+```
+- 设置适配器以及添加和移除头,尾部
+```java
+       //适配器
+        final Adapter mAdapter = new Adapter(getActivity(), list);
+        //设置适配器
+        mRecycleView.setAdapter(mAdapter);
+        //头部View
+        final View mHeaderView = LayoutInflater.from(getActivity()).inflate(R.layout.header_view, mRecycleView, false);
+        //添加头部
+        mRecycleView.addHeaderView(mHeaderView);
+        //头部的点击事件
+        mHeaderView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               //移除头部
+                mRecycleView.removeHeaderView(mHeaderView);
+                mAdapter.notifyItemRemoved(0);
+            }
+        });
+```
 后续会持续更新和对本库的bug修正
 
 ## 历史版本
