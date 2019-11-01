@@ -1,8 +1,10 @@
+[ ![Download](https://api.bintray.com/packages/sincerityzz/maven/SinceTools/images/download.svg?version=1.0.3) ](https://bintray.com/sincerityzz/maven/SinceTools/1.0.3/link)
 # SinceTools
  ![since.png](https://github.com/Sincerityzz/SinceUtils/blob/master/img/bg.jpg?raw=true)
 ## SinceTools这个库的主要目的就是看完一些经典的Android框架后自己手动去模仿简化版的一个工具库.当然也可以尝试去使用这个工具库
+[ ![Download](https://api.bintray.com/packages/sincerityzz/maven/SinceTools/images/download.svg?version=1.0.3) ](https://bintray.com/sincerityzz/maven/SinceTools/1.0.3/link)
 ```java
-  implementation 'com.sincerity:SinceTools:1.0.2'
+  implementation 'com.sincerity:SinceTools:1.0.3'
 ```
 ## 目前版本主要包括 
  ### 1. buttonKnife的手动版本 ioc 
@@ -169,6 +171,12 @@ class Adapter extends BaseAdapter<ChartData> {
 后续会持续更新和对本库的bug修正
 
 ## 历史版本
+### 1.0.3 
+#### 1.添加RecycleView的封装,包含对多布局头部尾部侧滑和分割线的封装,
+#### 2.添加异常拦截上报类
+#### 3.添加热修复的手动实现和阿里Spohix3的支持 
+#### 4.添加通用评论消息的SinceDialog
+
 ### 1.0.2 添加BannerView 添加可以切换网络引擎的Httputils类 
 ### 1.0.1 最初版本 实现基础ioc 和基础Volley功能 
 
