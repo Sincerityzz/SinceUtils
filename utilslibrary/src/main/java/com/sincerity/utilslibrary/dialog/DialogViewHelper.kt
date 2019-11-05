@@ -1,4 +1,4 @@
-package com.sincerity.sinceutils.dialog
+package com.sincerity.utilslibrary.dialog
 
 import android.content.Context
 import android.util.SparseArray

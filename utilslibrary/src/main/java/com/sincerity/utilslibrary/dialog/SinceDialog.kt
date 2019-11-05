@@ -1,4 +1,4 @@
-package com.sincerity.sinceutils.dialog
+package com.sincerity.utilslibrary.dialog
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -10,7 +10,7 @@ import android.view.View.FOCUSABLE
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.StyleRes
-import com.sincerity.sinceutils.R
+import com.sincerity.utilslibrary.R
 
 
 /**

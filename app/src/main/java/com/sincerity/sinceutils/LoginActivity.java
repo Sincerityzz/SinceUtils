@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView;
 
-import com.sincerity.sinceutils.dialog.SinceDialog;
+import com.sincerity.utilslibrary.dialog.SinceDialog;
 import com.sincerity.utilslibrary.ExceptionCrashHandler;
 import com.sincerity.utilslibrary.bugsince.FixDexManager;
 import com.sincerity.utilslibrary.utils.PermissionsUtils;
