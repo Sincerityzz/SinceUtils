@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: "guru.stefma.bintrayrelease"
-//apply plugin: 'kotlin-android'
-//apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     useLibrary 'org.apache.http.legacy'
@@ -35,24 +35,30 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.2.2'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
 //    implementation 'com.github.bumptech.glide:glide:4.9.0'
 }
 
 /** 以下开始是将Android Library上传到jcenter的相关配置**/
-version = "1.0.2" //版本号
-group = "com.sincerity" //jcenter的路径
-publish {
-    userOrg = 'sincerityzz' //bintray用户名
-    repoName = 'maven'  //要传过去的库名 创建仓库时，如果使用Bintray-release,名字就填成maven
-    artifactId = 'SinceTools'  //要传过去的项目名
-    desc = 'Android Tools Collection' //描述
-    website = 'https://github.com/Sincerityzz' //
-}
-//publish {
-//    userOrg = 'sincerityzz' //bintray账户下某个组织id
-//    groupId = 'com.sincerity' //maven仓库下库的包名，一般为模块包名
-//    artifactId = 'SinceTools' //项目名称
-//    publishVersion = '1.0.2' //版本号
-//    desc = 'Android Tools Collection' //项目介绍，可以不写
-//    website = 'https://github.com/Sincerityzz' //项目主页，可以不写
+//version = "1.0.3" //版本号
+//group = "com.sincerity" //jcenter的路径
+////当前这个bintrayRelease依赖于AndroidArtifacts
+//androidArtifact {
+//    artifactId = "bintrayrelease"
 //}
+//publish {
+//    userOrg = 'sincerityzz' //bintray用户名
+//    repoName = 'maven'  //要传过去的库名 创建仓库时，如果使用Bintray-release,名字就填成maven
+//    artifactId = 'SinceTools'  //要传过去的项目名
+//    desc = 'Android Tools Collection' //描述
+//    website = 'https://github.com/Sincerityzz' //
+//}
+
+publish {
+    userOrg = 'sincerityzz' //bintray账户下某个组织id
+    groupId = 'com.sincerity' //maven仓库下库的包名，一般为模块包名
+    artifactId = 'SinceTools' //项目名称
+    publishVersion = '1.0.3' //版本号
+    desc = 'Android Tools Collection' //项目介绍，可以不写
+    website = 'https://github.com/Sincerityzz' //项目主页，可以不写
+}

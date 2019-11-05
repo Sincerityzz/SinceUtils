@@ -10,7 +10,7 @@ import android.view.View.FOCUSABLE
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.StyleRes
-import com.sincerity.utilslibrary.R
+import com.sincerity.sinceutils.R
 
 
 /**
