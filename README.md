@@ -273,6 +273,7 @@ override fun chanageSkin(skinRes: SkinResource) {
 
 
 ## 历史版本
+
 ### 1.0.4
 #### 1.添加数据的支持
 #### 2.修复HttpUtils已知的Bug
