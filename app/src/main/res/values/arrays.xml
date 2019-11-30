@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="main_item">
+        <item>Ioc注解和收集Crash信息</item>
+        <item>热修复方案</item>
+        <item>Dialog</item>
+        <item>网络引擎结合数据库做缓存</item>
+        <item>插件换肤</item>
+    </string-array>
+</resources>

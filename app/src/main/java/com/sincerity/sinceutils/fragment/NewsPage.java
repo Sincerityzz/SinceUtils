@@ -1,26 +1,31 @@
 package com.sincerity.sinceutils.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.sincerity.sinceutils.ImageBean;
+import com.sincerity.framelibrary.base.HttpCallBack;
+import com.sincerity.sinceutils.bean.ImageBean;
 import com.sincerity.sinceutils.R;
-import com.sincerity.utilslibrary.http.HttpCallBack;
-import com.sincerity.utilslibrary.http.HttpUtils;
+import com.sincerity.utilslibrary.httputils.HttpUtils;
 import com.sincerity.utilslibrary.ioc.BindView;
 import com.sincerity.utilslibrary.view.BannerView.BannerAdapter;
 import com.sincerity.utilslibrary.view.BannerView.BannerViewPager;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Sincerity on 2019/9/6.
@@ -43,18 +48,26 @@ public class NewsPage extends Fragment {
     }
 
     private void initData() {
-        HttpUtils httpUtils = new HttpUtils();
-        httpUtils.post(BannerUrl, null, new HttpCallBack<List<ImageBean>>() {
-            @Override
-            public void onSuccess(String resultJson, List<ImageBean> beans) {
-                initViewPager(beans);
-            }
+        HttpUtils.Companion.
+                with(Objects.requireNonNull(getActivity()))
+                .url(BannerUrl)
+                .addParams()
+                .post()
+                .execute(new HttpCallBack<ImageBean>() {
+                    @Override
+                    public void onSuccess(ImageBean result) {
 
-            @Override
-            public void onFail(Throwable ex) {
+                        for (int i = 0; i < result.getData().size(); i++) {
+                            Log.e("admin", "成功" + result.getData().get(i).toString());
+                        }
+                    }
 
-            }
-        });
+                    @Override
+                    public void onFail(@NotNull Exception exception) {
+                        Log.e("admin", "失败" + Objects.requireNonNull(exception.getMessage()));
+                    }
+                });
+//        initViewPager(beans);
     }
 
     private void initViewPager(final List<ImageBean> beans) {

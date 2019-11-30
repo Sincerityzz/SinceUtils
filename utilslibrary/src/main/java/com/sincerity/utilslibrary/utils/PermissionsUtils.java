@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class PermissionsUtils {
     public static final int mRequestCode = 100;//权限请求码
-    public static boolean showSystemSetting = true;
+    private static boolean showSystemSetting = true;
 
     private PermissionsUtils() {
 
@@ -37,7 +37,7 @@ public class PermissionsUtils {
         return permissionsUtils;
     }
 
-    public void chekPermissions(Activity context, String[] permissions, IPermissionsResult permissionsResult) {
+    public void checkPermissions(Activity context, String[] permissions, IPermissionsResult permissionsResult) {
         mPermissionsResult = permissionsResult;
 
         if (Build.VERSION.SDK_INT < 23) {//6.0才用动态权限
@@ -48,10 +48,9 @@ public class PermissionsUtils {
         //创建一个mPermissionList，逐个判断哪些权限未授予，未授予的权限存储到mPerrrmissionList中
         List<String> mPermissionList = new ArrayList<>();
         //逐个判断你要的权限是否已经通过
-        for (int i = 0; i < permissions.length; i++) {
-        
-            if (ContextCompat.checkSelfPermission(context, permissions[i]) != PackageManager.PERMISSION_GRANTED) {
-                mPermissionList.add(permissions[i]);//添加还未授予的权限
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                mPermissionList.add(permission);//添加还未授予的权限
             }
         }
 
@@ -61,7 +60,6 @@ public class PermissionsUtils {
         } else {
             //说明权限都已经通过，可以做你想做的事情去
             permissionsResult.passPermissions();
-            return;
         }
 
 
@@ -72,12 +70,12 @@ public class PermissionsUtils {
     //参数： permissions  是我们请求的权限名称数组
     //参数： grantResults 是我们在弹出页面后是否允许权限的标识数组，数组的长度对应的是权限名称数组的长度，数组的数据0表示允许权限，-1表示我们点击了禁止权限
 
-    public void onRequestPermissionsResult(Activity context, int requestCode, String[] permissions,
+    public void onRequestPermissionsResult(Activity context, int requestCode,
                                            int[] grantResults) {
         boolean hasPermissionDismiss = false;//有权限没有通过
         if (mRequestCode == requestCode) {
-            for (int i = 0; i < grantResults.length; i++) {
-                if (grantResults[i] == -1) {
+            for (int grantResult : grantResults) {
+                if (grantResult == -1) {
                     hasPermissionDismiss = true;
                 }
             }
@@ -86,7 +84,7 @@ public class PermissionsUtils {
                 if (showSystemSetting) {
                     showSystemPermissionsSettingDialog(context);//跳转到系统设置权限页面，或者直接关闭页面，不让他继续访问
                 } else {
-                    mPermissionsResult.forbitPermissions();
+                    mPermissionsResult.forbidPermissions();
                 }
             } else {
                 //全部权限通过，可以进行下一步操作。。。
@@ -100,7 +98,7 @@ public class PermissionsUtils {
     /**
      * 不再提示权限时的展示对话框
      */
-    AlertDialog mPermissionDialog;
+    private AlertDialog mPermissionDialog;
 
     private void showSystemPermissionsSettingDialog(final Activity context) {
         final String mPackName = context.getPackageName();
@@ -122,7 +120,7 @@ public class PermissionsUtils {
                             //关闭页面或者做其他操作
                             cancelPermissionDialog();
                             //mContext.finish();
-                            mPermissionsResult.forbitPermissions();
+                            mPermissionsResult.forbidPermissions();
                         }
                     })
                     .create();
@@ -144,6 +142,6 @@ public class PermissionsUtils {
     public interface IPermissionsResult {
         void passPermissions();
 
-        void forbitPermissions();
+        void forbidPermissions();
     }
 }

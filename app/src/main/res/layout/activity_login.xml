@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    android:id="@+id/view_group"
+    tools:context=".ui.LoginActivity">
 
     <androidx.appcompat.widget.AppCompatButton
         android:onClick="dialogTest"

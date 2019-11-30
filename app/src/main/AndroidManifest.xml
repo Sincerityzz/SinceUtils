@@ -14,14 +14,25 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
-        android:name=".BaseApplication"
+        android:name=".common.BaseApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".KotlinActivity"></activity>
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.Skin1Activity"></activity>
+        <activity android:name=".ui.SkinPeelerActivity" />
+        <activity android:name=".ui.IocActivity" />
+        <activity android:name=".KotlinActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.taobao.android.hotfix.IDSECRET"
@@ -47,15 +58,11 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".TestActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".ui.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ui.SQLDateBaseActivity" />
+        <activity android:name=".ui.MainActivity" />
     </application>
 
 </manifest>

@@ -3,4 +3,18 @@
     <string name="news">新闻</string>
     <string name="found">发现</string>
     <string name="myInfo">我的</string>
+    <string name="queryAll">查询所有数据</string>
+    <string name="queryBySql">通过条件去查询</string>
+    <string name="queryById">通过ID查询</string>
+    <string name="update">更新数据</string>
+    <string name="delete">删除数据</string>
+    <string name="insert">单条插入</string>
+    <string name="btn_ioc">Ioc测试</string>
+    <string name="isNet">判断是否有网络</string>
+    <string name="crash">Crash的收集</string>
+    <string name="httpEngine">网络引擎</string>
+    <string name="dataInfoCache">数据的缓存</string>
+    <string name="plugInSkin">插件换肤功能</string>
+    <string name="restoreSkin">撤回换肤</string>
+    <string name="page_start">页面跳转</string>
 </resources>

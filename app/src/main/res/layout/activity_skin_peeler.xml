@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".ui.SkinPeelerActivity">
+
+    <Button
+        android:id="@+id/btn_jump"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@color/bg_color"
+        android:onClick="onPageJump"
+        android:text="@string/page_start"
+        android:textColor="@color/btn_reset_color"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_restoreSkin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@color/bg_color"
+        android:onClick="restoreSkinClick"
+        android:text="@string/restoreSkin"
+        android:textColor="@color/btn_reset_color"
+        app:layout_constraintTop_toBottomOf="@id/btn_jump" />
+
+    <Button
+        android:id="@+id/btn_skin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:onClick="skinClick"
+        android:text="@string/plugInSkin"
+        android:textColor="@color/btn_reset_color"
+        app:layout_constraintTop_toBottomOf="@id/btn_restoreSkin" />
+
+    <ImageView
+        android:id="@+id/iv_skin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/image_bg"
+        app:layout_constraintTop_toBottomOf="@+id/btn_skin" />
+</androidx.constraintlayout.widget.ConstraintLayout>
