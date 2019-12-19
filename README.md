@@ -1,4 +1,4 @@
-[ ![Download](https://api.bintray.com/packages/sincerityzz/maven/SinceTools/images/download.svg?version=1.0.4) ](https://bintray.com/sincerityzz/maven/SinceTools/1.0.4/link)
+[ ![Download](https://api.bintray.com/packages/sincerityzz/maven/SinceTools/images/download.svg?version=1.0.5) ](https://bintray.com/sincerityzz/maven/SinceTools/1.0.5/link)
 
 # SinceTools
 
@@ -6,9 +6,9 @@
 
 ## SinceTools这个库的主要目的就是看完一些经典的Android框架后自己手动去模仿简化版的一个工具库.当然也可以尝试去使用这个工具库
 
-[ ![Download](https://api.bintray.com/packages/sincerityzz/maven/SinceTools/images/download.svg?version=1.0.4) ](https://bintray.com/sincerityzz/maven/SinceTools/1.0.4/link)
+[ ![Download](https://api.bintray.com/packages/sincerityzz/maven/SinceTools/images/download.svg?version=1.0.5) ](https://bintray.com/sincerityzz/maven/SinceTools/1.0.4/link)
 ```java
-  implementation 'com.sincerity:SinceTools:1.0.3'
+  implementation 'com.sincerity:SinceTools:1.0.5'
 ```
 
 ## 目前版本主要包括
@@ -268,11 +268,12 @@ override fun chanageSkin(skinRes: SkinResource) {
         }
     }
 ```
-
+### 7. 添加许多常用的自定义View [**详情查看**](https://github.com/Sincerityzz/SinceUtils/tree/master/customview/src/main/java/com/sincerity/customview)
 
 
 ## 历史版本
-
+### 1.0.5
+##### 添加自定义View
 ### 1.0.4
 #### 1.添加数据的支持
 #### 2.修复HttpUtils已知的Bug
