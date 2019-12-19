@@ -1,4 +1,4 @@
-[ ![Download](https://api.bintray.com/packages/sincerityzz/maven/SinceTools/images/download.svg?version=1.0.3) ](https://bintray.com/sincerityzz/maven/SinceTools/1.0.3/link)
+[ ![Download](https://api.bintray.com/packages/sincerityzz/maven/SinceTools/images/download.svg?version=1.0.4) ](https://bintray.com/sincerityzz/maven/SinceTools/1.0.4/link)
 
 # SinceTools
 
@@ -6,8 +6,7 @@
 
 ## SinceTools这个库的主要目的就是看完一些经典的Android框架后自己手动去模仿简化版的一个工具库.当然也可以尝试去使用这个工具库
 
-[ ![Download](https://api.bintray.com/packages/sincerityzz/maven/SinceTools/images/download.svg?version=1.0.3) ](https://bintray.com/sincerityzz/maven/SinceTools/1.0.3/link)
-
+[ ![Download](https://api.bintray.com/packages/sincerityzz/maven/SinceTools/images/download.svg?version=1.0.4) ](https://bintray.com/sincerityzz/maven/SinceTools/1.0.4/link)
 ```java
   implementation 'com.sincerity:SinceTools:1.0.3'
 ```
