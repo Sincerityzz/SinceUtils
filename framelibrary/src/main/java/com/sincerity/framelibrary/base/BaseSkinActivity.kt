@@ -29,7 +29,7 @@ abstract class BaseSkinActivity : BaseActivity(), ISkinListener {
     private var mAppCompatViewInflater: SkinAppCompatViewInFalter? = null
     private val TAG = javaClass.simpleName
     private val PRE_sLOLLIPOP = Build.VERSION.SDK_INT < 21
-
+    private var builder: DefaultNavigationBar.Builder? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         val layoutInflater = LayoutInflater.from(this)
         LayoutInflaterCompat.setFactory2(layoutInflater, this)

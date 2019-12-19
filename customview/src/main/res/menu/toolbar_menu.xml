@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/add"
+        android:icon="@mipmap/ic_launcher"
+        android:title="添加"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/add2"
+        android:icon="@mipmap/ic_launcher"
+        android:title="添加2"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/add3"
+        android:icon="@mipmap/ic_launcher"
+        android:title="添加3"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/add4"
+        android:icon="@mipmap/ic_launcher"
+        android:title="添加4"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/add5"
+        android:icon="@mipmap/ic_launcher"
+        android:title="添加5"
+        app:showAsAction="withText" />
+</menu>

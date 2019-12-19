@@ -28,7 +28,6 @@ public class FragmentMangerHelper {
     public void addFragment(Fragment fragment) {
         //开启一个事务
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-
         //添加fragment
         fragmentTransaction.add(mContainerViewId, fragment);
         //提交这个事务

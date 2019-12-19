@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import com.sincerity.framelibrary.R
 import com.sincerity.utilslibrary.navigation.AbsNavigation
 
@@ -70,11 +69,21 @@ class DefaultNavigationBar<P : AbsNavigation.Builder.AbsNavigationPrams>(params:
             return this
         }
 
+        fun setBackGroundColor(color: Int): Builder {
+            prams.bgColor = color
+            return this
+        }
+
         /**
          * 设置返回
          */
-        fun setBackOnClickListener(mClickListener: View.OnClickListener): AbsNavigation.Builder {
+        fun setBackOnClickListener(mClickListener: View.OnClickListener): Builder {
             prams.mLeftOnClickListener = mClickListener
+            return this
+        }
+
+        fun setRightOnClickListener(mClickListener: View.OnClickListener): Builder {
+            prams.mRightOnClickListener = mClickListener
             return this
         }
 
@@ -84,7 +93,7 @@ class DefaultNavigationBar<P : AbsNavigation.Builder.AbsNavigationPrams>(params:
             var mRightTitle: String? = null
             var mVisibleBack = true
             var mRightRes = 0
-            var bgColor = ContextCompat.getColor(mContext, R.color.title_bar_color)
+            var bgColor = 0
             var mLeftOnClickListener = View.OnClickListener {
                 (mContext as Activity).finish()
             }

@@ -37,4 +37,12 @@ public interface IViewHolder<V extends RecyclerView.ViewHolder> {
 
     V setImgFromPath(int viewId, ImageLoader loader);
 
+    /**
+     * 设置View是否可见
+     *
+     * @param viewId  id
+     * @param visibility 是否可见
+     * @return 当前ViewHolder
+     */
+    V setViewVisibility(int viewId, int visibility);
 }

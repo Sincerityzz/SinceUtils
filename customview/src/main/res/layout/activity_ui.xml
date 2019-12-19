@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".full.UIActivity">
+
+    <com.sincerity.customview.full.UiRelateLayout
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="1080px"
+            android:layout_height="50px"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:layout_width="540px"
+            android:layout_height="50px"
+            android:layout_below="@id/tv1"
+            android:background="@color/colorAccent" />
+
+    </com.sincerity.customview.full.UiRelateLayout>
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line1"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/tv4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv3"
+        android:background="@color/colorAccent" />
+</RelativeLayout>

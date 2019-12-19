@@ -1,12 +1,13 @@
 package com.sincerity.utilslibrary.view.RecycleView.adapter;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.sincerity.utilslibrary.view.RecycleView.adapter.itype.IViewHolder;
 import com.sincerity.utilslibrary.view.RecycleView.adapter.itype.ImageLoader;
@@ -90,6 +91,13 @@ public class BaseViewHolder extends RecyclerView.ViewHolder implements IViewHold
     public BaseViewHolder setImgFromPath(int viewId, ImageLoader loader) {
         ImageView view = getView(viewId);
         loader.loadImage(view, loader.getPath());
+        return this;
+    }
+
+    @Override
+    public BaseViewHolder setViewVisibility(int viewId, int visibility) {
+        View view = getView(viewId);
+        view.setVisibility(visibility);
         return this;
     }
 

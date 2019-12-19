@@ -20,7 +20,6 @@ import com.sincerity.utilslibrary.dialog.SinceDialog
 import com.sincerity.utilslibrary.view.RecycleView.adapter.BaseAdapter
 import com.sincerity.utilslibrary.view.RecycleView.adapter.BaseViewHolder
 import com.sincerity.utilslibrary.view.RecycleView.decoration.RecycleViewItemDecoration
-import kotlinx.android.synthetic.main.activity_kotlin.*
 
 class KotlinActivity : AppCompatActivity() {
     private var adapter: BaseAdapter<String>? = null
@@ -45,12 +44,13 @@ class KotlinActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        val recyclerView = findViewById<RecyclerView>(R.id.exRecycle)
         DefaultNavigationBar.Builder(this).setTitle("测试学习")
-        exRecycle.layoutManager = LinearLayoutManager(this)
-        exRecycle.addItemDecoration(RecycleViewItemDecoration(3))
-        exRecycle.setRecycledViewPool(RecyclerView.RecycledViewPool())
-        exRecycle.itemAnimator = DefaultItemAnimator()
-        exRecycle.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.addItemDecoration(RecycleViewItemDecoration(3))
+        recyclerView.setRecycledViewPool(RecyclerView.RecycledViewPool())
+        recyclerView.itemAnimator = DefaultItemAnimator()
+        recyclerView.adapter = adapter
         adapter?.setOnItemClickListener { _, p ->
             val intent = Intent()
             var clazz: Class<*>? = null

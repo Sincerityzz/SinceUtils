@@ -13,7 +13,7 @@ public interface IAdapterListener {
     }
 
     interface onItemLongClickListener {
-        Boolean itemLongClick(View view, int p);
+         Boolean itemLongClick(View view, int p);
     }
 }
 

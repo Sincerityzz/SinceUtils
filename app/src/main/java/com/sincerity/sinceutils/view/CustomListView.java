@@ -23,8 +23,8 @@ public class CustomListView extends ListView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            //Integer.MAX_VALUE >> 2 模式 下是一个30位的值 前二位代表模式 后面30位代表值
-        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
-        super.onMeasure(widthMeasureSpec, expandSpec);
+        //Integer.MAX_VALUE >> 2 模式 下是一个30位的值 前二位代表模式 后面30位代表值
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }

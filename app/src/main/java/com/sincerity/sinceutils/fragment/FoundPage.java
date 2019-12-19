@@ -21,7 +21,6 @@ import com.sincerity.sinceutils.image.BaseImageLoader;
 import com.sincerity.utilslibrary.view.RecycleView.adapter.BaseAdapter;
 import com.sincerity.utilslibrary.view.RecycleView.adapter.BaseViewHolder;
 import com.sincerity.utilslibrary.view.RecycleView.adapter.WrapperRecycleView;
-import com.sincerity.utilslibrary.view.RecycleView.adapter.itype.IAdapterListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -239,12 +238,7 @@ class Adapter extends BaseAdapter<String> {
 //        TextView mTvMain = baseViewHolder.getView(R.id.item_tv_main);
 //        mTvMain.setText(s);
 //        ((TextView) baseViewHolder.itemView.findViewById(R.id.item_tv_main)).setText(s);
-        setOnItemClickListener(new IAdapterListener.OnItemClickListener() {
-            @Override
-            public void itemClick(View view, int p) {
 
-            }
-        });
     }
 
 }

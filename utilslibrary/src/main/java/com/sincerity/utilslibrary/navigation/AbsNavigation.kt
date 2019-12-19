@@ -2,7 +2,6 @@ package com.sincerity.utilslibrary.navigation
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +31,6 @@ abstract class AbsNavigation<out P : AbsNavigation.Builder.AbsNavigationPrams> c
             //获取Activity的根布局 android.R.id.content 根布局
             val mActivityDoctorView: ViewGroup = (mPrams.mContext as Activity).window.decorView as ViewGroup
             mPrams.mParent = mActivityDoctorView.getChildAt(0) as ViewGroup?
-            Log.e("Admin", mPrams.mParent.toString())
         }
         //创建View 查看源码
         val view = LayoutInflater.from(mPrams.mContext).inflate(bindViewById(), mPrams.mParent, false)
@@ -71,7 +69,8 @@ abstract class AbsNavigation<out P : AbsNavigation.Builder.AbsNavigationPrams> c
 
     fun setBackgroundColor(@IdRes viewId: Int, bgColor: Int) {
         if (viewId != 0) {
-            (mPrams.mParent?.findViewById<ViewGroup>(viewId))?.setBackgroundColor(bgColor)
+            val toolbar = mPrams.mParent?.findViewById<Toolbar>(viewId)
+            toolbar?.setBackgroundColor(bgColor)
         }
     }
 
